@@ -99,7 +99,7 @@ This report has two different views:
 
 Color codes:
 
-|Colour code |Representation | 
+|Color code |Representation | 
 |--|--| 
 |Green |Passed | 
 |Red |Failed | 
