@@ -21,11 +21,14 @@ This automated API test is implemented using Java programming language and Sprin
 
 The following are the other tools, frameworks and libraries used:
 
-|Tool / Framework / Library |Usage | |--|--| |Gradle |Build tool and dependency management | |Gherkin |Write the test
-cases in Behavior Driven Development(BDD) pattern | |Cucumber |Implement Gherkin test cases using Java programming
-language | |RESTAssured |Send request to API, receive the response, and map response to Data Transfer Object (DTO)  |
-|JUnit |Use JUnit assertions to verify actual result against the expected result | |Masterthought reports |Generate
-automated test report |
+|Tool / Framework / Library |Usage | 
+|--|--| 
+|Gradle |Build tool and dependency management | 
+|Gherkin |Write the test cases in Behavior Driven Development(BDD) pattern | 
+|Cucumber |Implement Gherkin test cases using Java programming language | 
+|RESTAssured |Send request to API, receive the response, and map response to Data Transfer Object (DTO)  |
+|JUnit |Use JUnit assertions to verify actual result against the expected result | 
+|Masterthought reports |Generate automated test report |
 
 **Code structure**
 
