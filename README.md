@@ -97,4 +97,10 @@ This report has two different views:
 
 ![Detailed results view](https://user-images.githubusercontent.com/25843579/128882992-c9cbc11f-399d-4a30-b698-21bb6dd1666b.png)
 
-|Colour code |Representation | |--|--| |Green |Passed | |Red |Failed | |Blue |Skipped |
+Color codes:
+
+|Colour code |Representation | 
+|--|--| 
+|Green |Passed | 
+|Red |Failed | 
+|Blue |Skipped |
