@@ -1,0 +1,77 @@
+import net.masterthought.cucumber.Configuration
+import net.masterthought.cucumber.ReportBuilder
+
+import java.nio.file.Paths
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url 'https://repo.spring.io/milestone' }
+        maven { url 'https://repo.spring.io/snapshot' }
+    }
+    dependencies {
+        classpath "net.masterthought:cucumber-reporting:5.5.4"
+    }
+}
+
+plugins {
+    id 'org.springframework.boot' version '2.6.0-SNAPSHOT'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
+}
+
+configurations {
+    all {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://repo.spring.io/milestone' }
+    maven { url 'https://repo.spring.io/snapshot' }
+}
+
+group = 'at.wheretheiss'
+version = '0.0.1-SNAPSHOT'
+
+dependencies {
+    implementation 'io.cucumber:cucumber-java:6.10.4'
+    implementation 'io.cucumber:cucumber-junit:6.10.4'
+    implementation 'io.cucumber:cucumber-spring:6.10.4'
+    implementation 'net.masterthought:cucumber-reporting:5.5.4'
+    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'io.rest-assured:json-schema-validator:4.4.0'
+    testImplementation 'io.rest-assured:rest-assured:4.4.0'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+def generateReport() {
+    java.nio.file.Path reportDirectory = Paths.get("${buildDir}/reports");
+    def jsonReports = fileTree(dir: "build/reports").include '**/*.json'.toString();
+    List<String> jsonReportFiles = new ArrayList<>();
+    jsonReportFiles.add(reportDirectory.resolve("test-report.json").toString());
+
+    String projectName = project.name;
+    Configuration configuration = new Configuration(reportDirectory.toFile(), projectName);
+    configuration.addClassifications("Version", project.version);
+
+    ReportBuilder reportBuilder = new ReportBuilder(jsonReportFiles, configuration);
+    reportBuilder.generateReports();
+}
+
+task generateReport() {
+    doLast {
+        generateReport()
+    }
+}
+
+test.finalizedBy(generateReport)
